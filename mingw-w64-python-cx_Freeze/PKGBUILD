@@ -4,8 +4,8 @@ _realname=cx_Freeze
 pkgbase=mingw-w64-python-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-python2-cx_Freeze"
          "${MINGW_PACKAGE_PREFIX}-python3-cx_Freeze")
-pkgver=4.3.3
-pkgrel=5
+pkgver=4.3.4
+pkgrel=1
 pkgdesc="Python package for freezing scripts into executables (mingw-w64)"
 arch=('any')
 license=('PSF')
@@ -14,7 +14,7 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-python2"
              "${MINGW_PACKAGE_PREFIX}-python3")
 options=('staticlibs' 'strip' '!debug')
 source=("https://pypi.python.org/packages/source/c/cx_Freeze/cx_Freeze-${pkgver}.tar.gz")
-sha256sums=('0c8b3ce53127ffacdfea6229616086887b1573f95ff56cdc3dbf07fae8942302')
+sha256sums=('40c7bbfa107e139d105fdf79d1a7540dbb9f84aaf0fecdd03420bf37f0031be2')
 
 prepare() {
   rm -Rf python2-cx_Freeze-${pkgver}-${CARCH}
