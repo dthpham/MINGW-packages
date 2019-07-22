@@ -3,16 +3,17 @@
 _realname=opencl-headers
 pkgbase=mingw-w64-${_realname}
 pkgname=${MINGW_PACKAGE_PREFIX}-${_realname}
-pkgver=2.2.20170516
-pkgrel=1
+pkgver=2.1.20161129 # date of the commit, branch 2.1
+pkgrel=4
 epoch=2
 pkgdesc='OpenCL (Open Computing Language) header files'
 arch=('any')
 url='https://www.khronos.org/registry/cl/'
 license=('custom')
 makedepends=(git python3)
-source=('git+https://github.com/KhronosGroup/OpenCL-Headers.git#commit=ec2566b'
-        'git+https://github.com/KhronosGroup/OpenCL-CLHPP.git#commit=e250e2e'
+source=('git+https://github.com/KhronosGroup/OpenCL-Headers.git#commit=abb2958'
+        #'git+https://github.com/KhronosGroup/OpenCL-CLHPP.git#commit=d54d52c'
+        'git+https://github.com/KhronosGroup/OpenCL-CLHPP.git#commit=befe77b'
         'LICENSE.txt')
 sha256sums=('SKIP'
             'SKIP'
@@ -26,7 +27,7 @@ prepare() {
 }
 
 package() {
-  cd "${srcdir}"/OpenCL-Headers/opencl22/CL
+  cd "${srcdir}"/OpenCL-Headers
 
   install -dm755 "${pkgdir}${MINGW_PREFIX}/include/CL"
 
