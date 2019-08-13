@@ -6,7 +6,7 @@ _realname=python2
 pkgbase="mingw-w64-${_realname}"
 pkgname="${MINGW_PACKAGE_PREFIX}-${_realname}"
 pkgver=2.7.16
-pkgrel=5
+pkgrel=6
 _pybasever=${pkgver%.*}
 pkgdesc="A high-level scripting language (mingw-w64)"
 arch=('any')
@@ -23,7 +23,7 @@ depends=("${MINGW_PACKAGE_PREFIX}-gcc-libs"
          "${MINGW_PACKAGE_PREFIX}-zlib"
         )
 makedepends=("${MINGW_PACKAGE_PREFIX}-gcc" "${MINGW_PACKAGE_PREFIX}-pkg-config")
-options=('!makeflags') # 'debug' '!strip')
+options=('!makeflags' 'debug' '!strip')
 source=("https://www.python.org/ftp/python/${pkgver%rc?}/Python-${pkgver}.tar.xz"
         0000-make-_sysconfigdata.py-relocatable.patch
         0001-fix-_nt_quote_args-using-subprocess-list2cmdline.patch
