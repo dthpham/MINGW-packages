@@ -1,0 +1,44 @@
+diff '--exclude=.git' --unified --recursive --text --color opencl-icd/icd_windows.c opencl-icd.new/icd_windows.c
+--- opencl-icd/icd_windows.c	2019-08-15 14:45:19.341026200 -0700
++++ opencl-icd.new/icd_windows.c	2019-08-15 14:52:42.884986400 -0700
+@@ -30,12 +30,9 @@
+  *
+  */
+ 
+-// go through the list of vendors in the registry and call khrIcdVendorAdd 
+-// for each vendor encountered
+-BOOL CALLBACK khrIcdOsVendorsEnumerate(PINIT_ONCE InitOnce, PVOID Parameter, PVOID *lpContext)
++BOOL khrIcdOsVendorsEnumerateHkey(HKEY hkey, const char *platformsName)
+ {
+     LONG result;
+-    const char* platformsName = "SOFTWARE\\Khronos\\OpenCL\\Vendors";
+     HKEY platformsKey = NULL;
+     DWORD dwIndex;
+ 
+@@ -46,7 +43,7 @@
+ 
+     KHR_ICD_TRACE("Opening key HKLM\\%s...\n", platformsName);
+     result = RegOpenKeyExA(
+-        HKEY_LOCAL_MACHINE,
++        hkey,
+         platformsName,
+         0,
+         KEY_READ,
+@@ -110,6 +107,15 @@
+     return TRUE;
+ }
+ 
++// go through the list of vendors in the registry and call khrIcdVendorAdd 
++// for each vendor encountered
++BOOL CALLBACK khrIcdOsVendorsEnumerate(PINIT_ONCE InitOnce, PVOID Parameter, PVOID *lpContext)
++{
++    BOOL r1 = khrIcdOsVendorsEnumerateHkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\Khronos\\OpenCL\\Vendors");
++    BOOL r2 = khrIcdOsVendorsEnumerateHkey(HKEY_CURRENT_USER, "Software\\Khronos\\OpenCL\\Vendors");
++    return r1 && r2;
++}
++
+ // go through the list of vendors only once
+ void khrIcdOsVendorsEnumerateOnce()
+ {
+Only in opencl-icd/: inc
+Only in opencl-icd.new/: include
